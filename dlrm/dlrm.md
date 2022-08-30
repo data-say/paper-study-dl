@@ -24,20 +24,20 @@
 
 ### Model Design and Architecture
 - DLRM의 4가지 주요 기술들    
-	![image1.png](image1.png)
+	![](images/image1.png)
 
 1. Embeddings
 	- categorical 데이터를 처리하기 위해 각 카테고리를 벡터 공간 상에 dense representation 으로 매핑한다.
 	- 임베딩 테이블 W가 있을 때, 각 임베딩 lookup은 one-hot 벡터 ei로 구할 수 있다.
-		- i번째 아이템의 임베딩 벡터를 얻기 위해서는 단순히 i번째 위치의 값만 1이며 나머지는 0인 one-hot 벡터 ei를 W에 내적하면 된다.
-		![expression1.png](expression1.png)
+		- i번째 아이템의 임베딩 벡터를 얻기 위해서는 단순히 i번째 위치의 값만 1이며 나머지는 0인 one-hot 벡터 ei를 W에 내적하면 된다.  
+		![](images/expression1.png)
 	- 한 개의 임베딩 벡터가 아닌 여러 개의 임베딩 벡터를 lookup하는 경우에도 임베딩 테이블 W에 multi-hot 벡터 aT를 내적하면 된다.
 		- aT = [0,...,ai1 ,...,aik ,...,0]
-		- A = [a1,...,at]
-		![expression2.png](expression2.png)
+		- A = [a1,...,at]  
+		![](images/expression2.png)
 	- DLRM은 categorical 데이터를 dense representation으로 매핑하기 위해 이러한 임베딩 테이블을 활용한다.
 	- 이러한 임베딩이 고안되고 이를 정확한 prediction에 활용하기 위해서는 latent factor 기법을 사용할 수 있다.
-	- 추가) 추천 시스템에서 임베딩을 사용하는 이유
+	- **추가)** 추천 시스템에서 임베딩을 사용하는 이유
 		- NLP에서 워드 임베딩을 사용하는 이유와 동일하다.
 		- 데이터 corpus를 바탕으로 word dictionary를 만들고 이를 one-hot vector로 표현하면 어떤 단어가 몇 번째 위치에 있다는 것 외에는 유의미한 정보를 얻기가 힘든데 반면, 임베딩 기법을 이용해 dense 벡터로 표현하게 되면 각 단어의 주변 단어들을 통해 해당 단어가 가지는 의미를 파악하고 표현할 수 있다.
 		- 추천 시스템에서도 마찬가지고 유저, 상품, 유저 행동들을 dense representation으로 임베딩하여 categorical 데이터들의 관계적인 특징들을 파악할 수 있다.
@@ -46,6 +46,7 @@
 	- 임베딩 테이블에서 얻은 임베딩 벡터를 정확한 예측에 활용하기 위해서는 latent factor 기법이 필요하다.
 
 3. Factorizatoin Machine
+
 4. Multilayer Perceptron
 
 #### DLRM Architecture
