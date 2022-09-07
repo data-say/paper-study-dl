@@ -78,7 +78,7 @@
 - recommendation system과 predictive analytics에서 일반적으로 사용되는 모델들 4가지(Embeddings, Matrix Factorization, Factorization machine, MLP)를 살펴보았으며, DLRM은 이러한 모델들에서 사용하는 기법들을 적절히 혼합하여 만들어진 SOTA personalization 모델이다.
 - 일반적으로 어떤 대상을 수로 표현하는 경우에 그 대상의 특징을 표현하는 방식은 continuous할 수도, categorical할 수도 있다.
 	- Continuous feature: 가격, 나이, 연봉 등
-	-  Categorical feature: 성별, 연령대
+	- Categorical feature: 성별, 연령대
 - 추천시스템에서 유저와 상품을 수로 표현할 때 여러 개의 categorical & continuous feature들로 표현이 되는데, categorical 인지 continuous인지에 따라 처리하는 방식이 달라진다.
 	- Categorical feature의 경우 각 feature는 동일 차원의 임베딩 벡터로 표현된다
 		- matrix factorization의 latent factor 개념
@@ -88,14 +88,11 @@
 - MLP를 거친 결과에 대해 sigmoid를 적용하면 최종 결과값인 유저가 상품을 클릭할 확률을 얻게 된다.
 - 구현
 	![](images/image2.png)
-	
+
 #### Comparison with Prior Models
-
-### Parallelism
-### Data
-- Random
-- Synthetic
-- Public
-
-### Experiments
-### Conclusion
+- 많은 딥러닝 기반 추천 모델의 경우 spare feature를 처리하기 위한 방법으로 high-order term을 생성한다.
+- Wide and Deep, Deep and Cross, DeepFM, xDeepFM과의 주요 차이점: embedded feature vector와 그 교차항을 처리하는 방법에 있다.
+	- 위 모델들은 high-order interaction을 구성하기 위한 전문화된 네트워크를 설계한다.
+	- 모델과 MLP의 결과를 합산하여 linear layer와 sigmoid 활성화를 통해 최종 확률을 산출한다.
+	- DLRM은 factorization machine을 모방하는 방식으로 임베딩을 처리하여 최종 MLP의 임베딩 쌍 사이의 dot-product (not cross-product)에 의해 생성된 교차항만을 고려하여 모델의 차원을 크게 감소시킨다.
+	- 특히, DLRM은 각 feature vector를 단일 범주를 나타내는 단일 단위로 해석하는 반면, Deep and Cross와 같은 네트워크는 feature vector의 각 요소를 서로 다른 교차항을 산출해내는 새로운 단위로 취급한다.
