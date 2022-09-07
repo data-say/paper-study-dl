@@ -29,11 +29,11 @@
 1. Embeddings
 	- categorical 데이터를 처리하기 위해 각 카테고리를 벡터 공간 상에 dense representation 으로 매핑한다.
 	- 임베딩 테이블 W가 있을 때, 각 임베딩 lookup은 one-hot 벡터 ei로 구할 수 있다.
-		- i번째 아이템의 임베딩 벡터를 얻기 위해서는 단순히 i번째 위치의 값만 1이며 나머지는 0인 one-hot 벡터 ei를 W에 내적하면 된다.  
+		- i번째 아이템의 임베딩 벡터를 얻기 위해서는 단순히 i번째 위치의 값만 1이며 나머지는 0인 one-hot 벡터 ei를 W에 내적하면 된다.   
 		![](images/expression1.png)
 	- 한 개의 임베딩 벡터가 아닌 여러 개의 임베딩 벡터를 lookup하는 경우에도 임베딩 테이블 W에 multi-hot 벡터 aT를 내적하면 된다.
 		- aT = [0,...,ai1 ,...,aik ,...,0]
-		- A = [a1,...,at]  
+		- A = [a1,...,at]   
 		![](images/expression2.png)
 	- DLRM은 categorical 데이터를 dense representation으로 매핑하기 위해 이러한 임베딩 테이블을 활용한다.
 	- 이러한 임베딩이 고안되고 이를 정확한 prediction에 활용하기 위해서는 latent factor 기법을 사용할 수 있다.
@@ -47,7 +47,7 @@
 	- objective function (아래 식을 최소화하는 방향으로 학습)
 		- wi: i번째 상품의 임베딩 벡터
 		- vj: j번째 유저의 임베딩 벡터
-		- rij: j번째 유저의 i번째 아이템에 대한 평가 
+		- rij: j번째 유저의 i번째 아이템에 대한 평가   
 		![](images/expression3.png)
 	- 위 식의 의미
 		- NLP에서 두 단어에 대한 임베딩 벡터가 주어졌을 때, 두 벡터를 내적하여 두 단어간의 의미상 유사도를 구할 수 있다
@@ -59,7 +59,7 @@
 3. Factorizatoin Machine
 	- 일반적으로 prediction문제는 입력 데이터 x와 타겟 레이블 y 간의 매핑을 표현하는 예측 함수를 구하는 것이다.
 		- 예) 클릭률을 나타내는 T={+1,-1}에서 클릭함(+1), 클릭하지 않음(-1)을 의미
-	- Factorization Machine(FM)은 유저,상품 간의 이차 상호작용을 linear 모델로 추정하여 해당 상품을 클릭(또는 구매)할 확률을 예측한다.
+	- Factorization Machine(FM)은 유저,상품 간의 이차 상호작용을 linear 모델로 추정하여 해당 상품을 클릭(또는 구매)할 확률을 예측한다.  
 		![](images/expression4.png)
 	- FM의 장점
 		- SVM과는 다르게 sparse data에서도 파라미터 추정이 가능하다
@@ -68,7 +68,7 @@
 			- 이차 상호작용의 연산을 각 임베딩 벡터 간의 연산으로 처리하여 복잡도 감소
 
 4. Multilayer Perceptron
-	- 딥러닝에서 가장 기본적인 레이어라고 할 수 있는 MLP는 fully connected layer와 활성화함수로 이루어져 있다.
+	- 딥러닝에서 가장 기본적인 레이어라고 할 수 있는 MLP는 fully connected layer와 활성화함수로 이루어져 있다.  
 		![](images/expression5.png)
 	- MLP는 FM을 사용하는 경우보다도 복잡한 상호작용을 파악할 때 효과적이다.
 	- NCF(Neural Collaborative Filtering)에서는 내적을 통해서 임베딩 벡터 간의 상호작용을 계산하지 않고 MLP를 사용한다.
@@ -86,7 +86,7 @@
 - 위와 같은 방식으로 feature들을 처리하면 각각에 대해 임베딩 벡터와 dense representation을 얻을 수 있는데, 이 둘 간의 상호작용을 계산하기 위해 내적을 한다,
 - 내적을 한 뒤에는 내적 후 얻은 결과값 벡터와 내적 이전의 dense feature들을 concat하여 MLP를 거치게 한다
 - MLP를 거친 결과에 대해 sigmoid를 적용하면 최종 결과값인 유저가 상품을 클릭할 확률을 얻게 된다.
-- 구현
+- 구현   
 	![](images/image2.png)
 
 #### Comparison with Prior Models
